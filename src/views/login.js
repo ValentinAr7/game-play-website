@@ -1,6 +1,6 @@
-const loginTemplate = () => html`
+const loginTemplate = (onSubmit) => html`
 <section id="login-page" class="auth">
-<form id="login">
+< @submit=${onSubmit}form id="login">
 
     <div class="container">
         <div class="brand-logo"></div>
@@ -32,7 +32,10 @@ export function loginView(ctx){
             return alert ('All fields are requiered')
         }
 
-        
+        await login(password, email);
+        ctx.updateNav()
+        ctx.page.redirect('/')
+
 
     }
 
