@@ -38,8 +38,6 @@ export function loginView(ctx){
         await login(password, email);
         ctx.updateNav()
         ctx.page.redirect('/')
-
-
     }
 
 }
