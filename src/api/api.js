@@ -1,4 +1,4 @@
-import { getUserData } from "../util.js"
+import { clearUserData, getUserData } from "../util.js"
 
 let host = 'http://localhost:3030'
 
@@ -19,5 +19,26 @@ async function request(url, method, data){
         options.headers['X-Authorization'] = userData.accessToken
     }
 
-    
+    try{
+        const res = fetch (host + url, options)
+
+        if(res.ok == false){
+            if(res.status == 403){
+                clearUserData()
+            }
+            const error = await res.json();
+            throw new Error(error.message)
+        }
+
+        if(res.status == 204){
+            return res
+        } else {
+            return res.json();
+        }
+    } catch (err){
+        alert(err.message)
+        throw err
+    }
 }
+
+
