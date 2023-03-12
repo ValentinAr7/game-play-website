@@ -2,25 +2,27 @@ import { page, render } from './lib.js'
 import { logout } from './api/users.js'
 import { getUserData } from './util.js'
 import { loginView } from './views/login.js';
+
+
 const main = document.getElementById('main')
 
 page(decorateContext);
 page('/', loginView)
 
-function decorateContext(ctx, next){
+function decorateContext(ctx, next) {
     ctx.render = renderMain;
     ctx.updateNav = updateNav
     next()
 }
 
-function renderMain(templateResult){
+function renderMain(templateResult) {
     render(templateResult, main)
 }
 
-function updateNav(){
+function updateNav() {
     const userData = getUserData()
 
-    if(userData){
+    if (userData) {
         document.getElementById('user').style.display = 'block';
         document.getElementById('guest').style.display = 'none'
     } else {
@@ -29,7 +31,7 @@ function updateNav(){
     }
 }
 
-function onLogout(){
+function onLogout() {
     logout()
     updateNav()
     page.redirect('/')
