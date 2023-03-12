@@ -1,10 +1,11 @@
 import { page, render } from './lib.js'
 import { logout } from './api/users.js'
 import { getUserData } from './util.js'
+import { loginView } from './views/login.js';
 const main = document.getElementById('main')
 
 page(decorateContext);
-page('/', () => console.log('Home'));
+page('/', loginView)
 
 function decorateContext(ctx, next){
     ctx.render = renderMain;
