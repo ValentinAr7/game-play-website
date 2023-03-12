@@ -21,6 +21,19 @@ const loginTemplate = () => html`
 export function loginView(ctx){
     ctx.render(loginTemplate(onSubmit))
 
-    async function onSubmit(event){}
+    async function onSubmit(event){
+        event.preventDefault()
+        const formData = new FormData(event.target)
+
+        const email = formData.get('email').trim()
+        const password = formData.get('password').trim()
+
+        if(email == '' || password == ''){
+            return alert ('All fields are requiered')
+        }
+
+        
+
+    }
 
 }
